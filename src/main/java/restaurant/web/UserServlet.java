@@ -13,9 +13,8 @@ public class UserServlet extends javax.servlet.http.HttpServlet {
     private static final Logger log = getLogger(UserServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("redirect to users");
+        log.debug("forward to users");
 
-        //request.getRequestDispatcher("/users.jsp").forward(request, response);
-        response.sendRedirect("users.jsp");
-            }
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
+          }
 }
