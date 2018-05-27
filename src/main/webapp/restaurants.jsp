@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <c:forEach items="${restaurants}" var="dish">
-            <jsp:useBean id="dish" scope="page" type="restaurant.model.Dish"/>
+            <jsp:useBean id="dish" type="restaurant.model.Dish"/>
             <tr >
                 <td>${dish.date}</td>
                 <td>${dish.restaurant}</td>
