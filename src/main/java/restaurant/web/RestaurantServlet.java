@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import restaurant.repository.DishRepository;
+import restaurant.web.user.UserRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,12 +21,14 @@ public class RestaurantServlet extends HttpServlet {
 
     private ConfigurableApplicationContext springContext;
     private DishRepository repository;
+    private UserRestController controller;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         repository = springContext.getBean(DishRepository.class);
+        controller = springContext.getBean(UserRestController.class);
     }
 
     @Override
@@ -38,7 +41,8 @@ public class RestaurantServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("forward to restaurants");
 
-        request.setAttribute("restaurants", repository.getMENU());
+        //request.setAttribute("restaurants", repository.getMENU());
+        request.setAttribute("users", controller.getAll());
         request.getRequestDispatcher("/restaurants.jsp").forward(request, response);
     }
 }

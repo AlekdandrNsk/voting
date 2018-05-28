@@ -8,26 +8,46 @@
 <body>
 
 
+<%--<section>--%>
+    <%--<h3><a href="index.html">Home</a></h3>--%>
+    <%--<h2>Restaurants List</h2>--%>
+    <%--<hr/>--%>
+    <%--<table border="1" cellpadding="8" cellspacing="0">--%>
+        <%--<thead>--%>
+        <%--<tr>--%>
+            <%--<th>Date</th>--%>
+            <%--<th>Restaurant</th>--%>
+            <%--<th>Name</th>--%>
+            <%--<th>Price</th>--%>
+        <%--</tr>--%>
+        <%--</thead>--%>
+        <%--<c:forEach items="${restaurants}" var="dish">--%>
+            <%--<jsp:useBean id="dish" type="restaurant.model.Dish"/>--%>
+            <%--<tr >--%>
+                <%--<td>${dish.date}</td>--%>
+                <%--<td>${dish.restaurant}</td>--%>
+                <%--<td>${dish.name}</td>--%>
+                <%--<td>${dish.price}</td>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
+<%--</section>--%>
+
 <section>
-    <h3><a href="index.html">Home</a></h3>
-    <h2>Restaurants List</h2>
-    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Restaurant</th>
+            <th>E-mail</th>
+            <th>Registererd</th>
             <th>Name</th>
-            <th>Price</th>
         </tr>
         </thead>
-        <c:forEach items="${restaurants}" var="dish">
-            <jsp:useBean id="dish" type="restaurant.model.Dish"/>
+        <c:forEach items="${users}" var="user">
+            <jsp:useBean id="user" type="restaurant.model.User"/>
             <tr >
-                <td>${dish.date}</td>
-                <td>${dish.restaurant}</td>
-                <td>${dish.name}</td>
-                <td>${dish.price}</td>
+                <td>${user.email}</td>
+                <td>${user.registered}</td>
+                <td>${user.name}</td>
             </tr>
         </c:forEach>
     </table>
