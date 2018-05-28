@@ -1,1 +1,1 @@
-# voting
+# voting [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0836fe0522a44c9bb98c353221e9cf24)](https://www.codacy.com/app/AlekdandrNsk/voting?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlekdandrNsk/voting&amp;utm_campaign=Badge_Grade)
