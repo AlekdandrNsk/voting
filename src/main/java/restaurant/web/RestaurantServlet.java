@@ -1,9 +1,8 @@
 package restaurant.web;
 
 import org.slf4j.Logger;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import restaurant.repository.DishRepository;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import restaurant.web.user.UserRestController;
 
 import javax.servlet.ServletConfig;
@@ -19,24 +18,14 @@ public class RestaurantServlet extends HttpServlet {
 
     private static final Logger log = getLogger(RestaurantServlet.class);
 
-    private ConfigurableApplicationContext springContext;
-    private DishRepository repository;
     private UserRestController controller;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
-        repository = springContext.getBean(DishRepository.class);
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         controller = springContext.getBean(UserRestController.class);
     }
-
-    @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
-    }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("forward to restaurants");

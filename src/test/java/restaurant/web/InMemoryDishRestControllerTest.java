@@ -4,6 +4,7 @@ import org.junit.*;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import restaurant.model.Dish;
+import restaurant.model.User;
 import restaurant.web.dish.DishRestController;
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class InMemoryDishRestControllerTest {
     @Test
     public void testGetAll() throws Exception {
         //controller.delete(UserTestData.USER_ID);
-        Collection<Dish> menu = controller.getAll();
+        Collection<User> menu = controller.getAll();
         Assert.assertEquals(menu.size(), 9);
         //Assert.assertEquals(users.iterator().next(), ADMIN)
         ;

@@ -34,6 +34,9 @@
 <%--</section>--%>
 
 <section>
+    <h3><a href="index.html">Home</a></h3>
+    <h2>Restaurants List</h2>
+    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>

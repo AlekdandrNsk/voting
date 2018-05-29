@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import restaurant.model.Dish;
+import restaurant.model.User;
 import restaurant.web.dish.DishRestController;
 
 import java.util.Collection;
@@ -28,7 +29,7 @@ public class InMemoryDishRestControllerSpringTest {
 
     @Test
     public void testDelete() throws Exception {
-        Collection<Dish> menu = controller.getAll();
+        Collection<User> menu = controller.getAll();
         Assert.assertEquals(menu.size(), 9);
     }
 

@@ -4,10 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import restaurant.model.Dish;
 import restaurant.model.User;
-import restaurant.repository.DishRepository;
-import restaurant.repository.JpaUserRepositoryImpl;
+import restaurant.repository.UserRepository;
 
 import java.util.List;
 
@@ -15,10 +13,10 @@ import java.util.List;
 public class UserRestController {
     private static final Logger log = LoggerFactory.getLogger(UserRestController.class);
 
-    private final JpaUserRepositoryImpl repository;
+    private final UserRepository repository;
 
     @Autowired
-    public UserRestController(JpaUserRepositoryImpl repository) {
+    public UserRestController(UserRepository repository) {
         this.repository = repository;
     }
 
