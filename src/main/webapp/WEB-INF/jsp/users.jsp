@@ -78,10 +78,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <span class="fa fa-close" aria-hidden="true"></span>
+                    <span class="fa fa-close" aria-hidden="true"></span>cancel
                 </button>
                 <button type="button" class="btn btn-primary" onclick="save()">
-                    <span class="fa fa-check" aria-hidden="true"></span>
+                    <span class="fa fa-check" aria-hidden="true"></span>save
                 </button>
             </div>
         </div>
