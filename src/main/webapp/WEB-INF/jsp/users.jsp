@@ -8,33 +8,42 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-
-<section>
-    <h3>USERS</h3>
-
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-        <tr>
-            <th>User name</th>
-            <th>email</th>
-            <th>roles</th>
-            <th>active</th>
-            <th>registered</th>
-        </tr>
-        </thead>
-        <c:forEach items="${users}" var="user">
-            <jsp:useBean id="user" scope="page" type="restaurant.model.User"/>
+<div class="jumbotron">
+    <div class="container">
+        <h3>Users</h3>
+        <br/>
+        <button class="btn btn-primary">
+            <span class="fa fa-plus"></span>
+            add
+        </button>
+        <br/><br/>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td><c:out value="${user.name}"/></td>
-                <td><a href="mailto:${user.email}">${user.email}</a></td>
-                <td>${user.roles}</td>
-                <td><%=user.isEnabled()%>
-                </td>
-                <td><fmt:formatDate value="${user.registered}" pattern="dd-MM-yyyy"/></td>
+                <th>User name</th>
+                <th>email</th>
+                <th>roles</th>
+                <th>active</th>
+                <th>registered</th>
+                <th></th>
+                <th></th>
             </tr>
-        </c:forEach>
-    </table>
-</section>
+            </thead>
+            <c:forEach items="${users}" var="user">
+                <jsp:useBean id="user" type="restaurant.model.User"/>
+                <tr>
+                    <td><c:out value="${user.name}"/></td>
+                    <td><a href="mailto:${user.email}">${user.email}</a></td>
+                    <td>${user.roles}</td>
+                    <td><input type="checkbox" <c:if test="${user.enabled}">checked</c:if>/></td>
+                    <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
+                    <td><a><span class="fa fa-pencil"></span></a></td>
+                    <td><a><span class="fa fa-remove"></span></a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

@@ -6,19 +6,18 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-<section>
-    <form method="post" action="users">
-        Login as: <select name="userId">
-    <option value="100000" selected>User</option>
-    <option value="100001">Admin</option>
-</select>
-        <button type="submit">Select</button>
-</form>
-<ul>
-    <li><a href="users">Users</a></li>
-    <li><a href="meals">Meals</a></li>
-</ul>
-</section>
+<div class="jumbotron">
+    <div class="container">
+        <form method="post" action="users" class="form-inline">
+            <label>login</label>
+            <select name="userId" class="form-control mx-3">
+                <option value="100000" selected>User</option>
+                <option value="100001">Admin</option>
+            </select>
+            <button type="submit" class="btn btn-primary">select</button>
+        </form>
+    </div>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
