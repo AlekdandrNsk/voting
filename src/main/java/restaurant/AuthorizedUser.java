@@ -3,6 +3,8 @@ package restaurant;
 
 import restaurant.model.AbstractBaseEntity;
 
+import static restaurant.util.UserUtil.DEFAULT_CALORIES_PER_DAY;
+
 public class AuthorizedUser {
     private static int id = AbstractBaseEntity.START_SEQ;
 
@@ -15,6 +17,6 @@ public class AuthorizedUser {
     }
 
     public static int getCaloriesPerDay() {
-        return 2000;
+        return DEFAULT_CALORIES_PER_DAY;
     }
 }
