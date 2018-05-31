@@ -3,8 +3,12 @@ package restaurant.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.transaction.annotation.Transactional;
 import restaurant.model.User;
 import restaurant.repository.UserRepository;
+import restaurant.to.UserTo;
+import restaurant.util.UserUtil;
 
 import java.util.List;
 
@@ -38,6 +42,12 @@ public abstract class AbstractUserController {
     public void update(User user, int id) {
         log.info("update {} with id={}", user, id);
         repository.save(user);
+    }
+
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo);
+        User user = get(userTo.getId());
+        repository.save(UserUtil.updateFromTo(user, userTo));
     }
 
     public User getByMail(String email) {
