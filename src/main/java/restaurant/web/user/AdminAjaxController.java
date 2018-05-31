@@ -1,6 +1,8 @@
 package restaurant.web.user;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import restaurant.model.Role;
 import restaurant.model.User;
@@ -33,5 +35,13 @@ public class AdminAjaxController extends AbstractUserController {
         if (user.isNew()) {
             super.create(user);
         }
+    }
+
+    @PostMapping(value = "/{id}")
+    @CacheEvict(value = "users", allEntries = true)
+    @Override
+    @Transactional
+    public void enable(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
+        super.enable(id, enabled);
     }
 }

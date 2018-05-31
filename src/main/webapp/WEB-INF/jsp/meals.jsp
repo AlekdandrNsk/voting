@@ -5,60 +5,132 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
+<script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
+<script type="text/javascript" src="resources/js/mealDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
-<section>
-    <h3>title</h3>
+<div class="jumbotron pt-4">
+    <div class="container">
+        <h3>Meals</h3>
 
-    <form method="post" action="meals/filter">
-        <dl>
-            <dt>startDate:</dt>
-            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
-        </dl>
-        <dl>
-            <dt>endDate:</dt>
-            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
-        </dl>
-        <dl>
-            <dt>startTime:</dt>
-            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
-        </dl>
-        <dl>
-            <dt>endTime:</dt>
-            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
-        </dl>
-        <button type="submit">filter</button>
-    </form>
-    <hr>
-    <a href="meals/create">add</a>
-    <hr>
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-        <tr>
-            <th>dateTime</th>
-            <th>description</th>
-            <th>meal</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" scope="page" type="restaurant.to.MealWithExceed"/>
-            <tr data-mealExceed="${meal.exceed}">
-                <td>
-                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
-                        <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
-                        <%--${fn:replace(meal.dateTime, 'T', ' ')}--%>
-                        ${fn:formatDateTime(meal.dateTime)}
-                </td>
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-                <td><a href="meals/update?id=${meal.id}">update</a></td>
-                <td><a href="meals/delete?id=${meal.id}">delete</a></td>
+        <%--https://getbootstrap.com/docs/4.0/components/card/--%>
+        <div class="row">
+            <div class="col-7">
+                <div class="card">
+                    <div class="card-header"><h5>Date/Time filtration</h5></div>
+                    <div class="card-body py-0">
+                        <form id="filter">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="startDate">startDate</label>
+                                        <input class="form-control col-8" type="date" name="startDate" id="startDate">
+
+                                        <label class="col-form-label" for="endDate">endDate</label>
+                                        <input class="form-control col-8" type="date" name="endDate" id="endDate">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="startTime">startTime</label>
+                                        <input class="form-control col-5" type="time" name="startTime" id="startTime">
+
+                                        <label class="col-form-label" for="endTime">endTime</label>
+                                        <input class="form-control col-5" type="time" name="endTime" id="endTime">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary" onclick="updateTable()">
+                            <span class="fa fa-filter"></span>
+                            filter
+                        </button>
+                        <button class="btn btn-danger" onclick="clearFilter()">
+                            <span class="fa fa-remove"></span>
+                            cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <button class="btn btn-primary" onclick="add()">
+            <span class="fa fa-plus"></span>
+            add
+        </button>
+        <table class="table table-striped" id="datatable">
+            <thead>
+            <tr>
+                <th>dateTime</th>
+                <th>description</th>
+                <th>calories</th>
+                <th></th>
+                <th></th>
             </tr>
-        </c:forEach>
-    </table>
-</section>
+            </thead>
+            <c:forEach items="${meals}" var="meal">
+                <jsp:useBean id="meal" type="restaurant.to.MealWithExceed"/>
+                <tr data-mealExceed="${meal.exceed}">
+                    <td>
+                            <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+                            <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
+                            <%--${fn:replace(meal.dateTime, 'T', ' ')}--%>
+                            ${fn:formatDateTime(meal.dateTime)}
+                    </td>
+                    <td>${meal.description}</td>
+                    <td>${meal.calories}</td>
+                    <td><a><span class="fa fa-pencil"></span></a></td>
+                    <td><a onclick="deleteRow(${meal.id})"><span class="fa fa-remove"></span></a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="editRow">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">add</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="detailsForm">
+                    <input type="hidden" id="id" name="id">
+
+                    <div class="form-group">
+                        <label for="dateTime" class="col-form-label">dateTime</label>
+                        <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
+                               placeholder="dateTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-form-label">description</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                               placeholder="description">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calories" class="col-form-label">calories</label>
+                        <input type="number" class="form-control" id="calories" name="calories" placeholder="1000">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <span class="fa fa-close"></span>
+                    cancel
+                </button>
+                <button type="button" class="btn btn-primary" onclick="save()">
+                    <span class="fa fa-check"></span>
+                    save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

@@ -44,4 +44,11 @@ public abstract class AbstractUserController {
         log.info("getByEmail {}", email);
         return repository.getByEmail(email);
     }
+
+    public void enable(int id, boolean enabled) {
+        log.info((enabled ? "enable " : "disable ") + id);
+        User user = get(id);
+        user.setEnabled(enabled);
+        repository.save(user);
+    }
 }

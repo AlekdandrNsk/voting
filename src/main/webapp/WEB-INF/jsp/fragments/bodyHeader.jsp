@@ -4,7 +4,7 @@
     <div class="container">
         <a href="meals" class="navbar-brand"><img src="resources/images/icon-meal.png">Voting System</a>
         <form class="form-inline my-2">
-            <a class="btn btn-info mr-2" href="users">Users</a>
+            <a class="btn btn-info mr-1" href="users">Users</a>
             <a class="btn btn-primary" href="">
                 <span class="fa fa-sign-in"></span>
             </a>
