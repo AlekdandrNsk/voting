@@ -7,15 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import restaurant.AuthorizedUser;
 import restaurant.repository.MealRepository;
-import restaurant.repository.UserRepository;
 import restaurant.util.MealsUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RootController {
-    @Autowired
-    private UserRepository repository;
 
     @Autowired
     private MealRepository repository1;
@@ -26,8 +23,7 @@ public class RootController {
     }
 
     @GetMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users", repository.getAll());
+    public String users() {
         return "users";
     }
 
