@@ -13,6 +13,7 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
     <import resource="spring-security.xml"/>
+    <context:component-scan base-package="restaurant.**.security"/>
 
     <context:component-scan base-package="restaurant.**.repository.datajpa"/>
     <jpa:repositories base-package="restaurant.**.repository.datajpa"/>

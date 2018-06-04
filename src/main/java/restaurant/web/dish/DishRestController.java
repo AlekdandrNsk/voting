@@ -25,7 +25,7 @@ public class DishRestController {
 //    public Meal get(int id) {
 //        int userId = AuthorizedUser.id();
 //        log.info("get meal {} for user {}", id, userId);
-//        return service.get(id, userId);
+//        return security.get(id, userId);
 //    }
 
 //    @CacheEvict(value = "users", allEntries = true)
@@ -33,7 +33,7 @@ public class DishRestController {
 //        int userId = AuthorizedUser.id();
 //
 //        log.info("delete meal {} for user {}", id, userId);
-//        service.delete(id, userId);
+//        security.delete(id, userId);
 //    }
 
     @Cacheable("users")
@@ -47,7 +47,7 @@ public class DishRestController {
 //        int userId = AuthorizedUser.id();
 //        checkNew(meal);
 //        log.info("create {} for user {}", meal, userId);
-//        return service.create(meal, userId);
+//        return security.create(meal, userId);
 //    }
 //
 //    @CacheEvict(value = "users", allEntries = true)
@@ -55,7 +55,7 @@ public class DishRestController {
 //        int userId = AuthorizedUser.id();
 //        assureIdConsistent(meal, id);
 //        log.info("update {} for user {}", meal, userId);
-//        service.update(meal, userId);
+//        security.update(meal, userId);
 //    }
 
 }
