@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class RootController {
 
-    @Autowired
-    private MealRepository repository1;
-
     @GetMapping("/")
     public String root() {
         return "redirect:meals";
@@ -33,9 +30,7 @@ public class RootController {
     }
 
     @GetMapping("/meals")
-    public String meals(Model model) {
-        model.addAttribute("meals",
-                MealsUtil.getWithExceeded(repository1.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
+    public String meals() {
         return "meals";
     }
 }

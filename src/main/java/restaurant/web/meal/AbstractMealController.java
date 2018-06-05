@@ -65,12 +65,44 @@ public abstract class AbstractMealController {
         int userId = AuthorizedUser.id();
         log.info("getBetween dates({} - {}) time({} - {}) for user {}", startDate, endDate, startTime, endTime, userId);
 
+//        List<Meal> mealsDateFiltered = repository.getBetween(
+//                orElse(LocalDateTime.of(startDate, LocalTime.MIN), LocalDateTime.of(DateTimeUtil.MIN_DATE, LocalTime.MIN))
+//                , orElse(LocalDateTime.of(endDate, LocalTime.MAX), LocalDateTime.of(DateTimeUtil.MAX_DATE, LocalTime.MAX)), userId);
+
         List<Meal> mealsDateFiltered = repository.getBetween(
-                orElse(LocalDateTime.of(startDate, LocalTime.MIN), LocalDateTime.of(DateTimeUtil.MIN_DATE, LocalTime.MIN))
-                , orElse(LocalDateTime.of(endDate, LocalTime.MAX), LocalDateTime.of(DateTimeUtil.MAX_DATE, LocalTime.MAX)), userId);
+                LocalDateTime.of(orElse(startDate, DateTimeUtil.MIN_DATE), LocalTime.MIN),
+                LocalDateTime.of(orElse(endDate, DateTimeUtil.MAX_DATE), LocalTime.MAX),
+                userId);
 
         return MealsUtil.getFilteredWithExceeded(mealsDateFiltered, AuthorizedUser.getCaloriesPerDay(),
                 orElse(startTime, LocalTime.MIN), orElse(endTime, LocalTime.MAX)
         );
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
