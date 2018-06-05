@@ -1,6 +1,8 @@
 package restaurant.util;
 
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import restaurant.model.Role;
 import restaurant.model.User;
 import restaurant.to.UserTo;
@@ -22,6 +24,13 @@ public class UserUtil {
         user.setEmail(userTo.getEmail().toLowerCase());
         user.setCaloriesPerDay(userTo.getCaloriesPerDay());
         user.setPassword(userTo.getPassword());
+        return user;
+    }
+
+    public static User prepareToSave(User user, PasswordEncoder passwordEncoder) {
+        String password = user.getPassword();
+        user.setPassword(StringUtils.isEmpty(password) ? password : passwordEncoder.encode(password));
+        user.setEmail(user.getEmail().toLowerCase());
         return user;
     }
 }
