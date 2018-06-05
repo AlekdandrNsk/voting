@@ -1,19 +1,19 @@
 package restaurant.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
 import restaurant.AuthorizedUser;
-import restaurant.repository.MealRepository;
-import restaurant.util.MealsUtil;
+import restaurant.to.UserTo;
+import restaurant.web.user.AbstractUserController;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
-public class RootController {
+public class RootController extends AbstractUserController {
 
     @GetMapping("/")
     public String root() {
@@ -35,5 +35,23 @@ public class RootController {
     @GetMapping("/meals")
     public String meals() {
         return "meals";
+    }
+
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
+        if (result.hasErrors()) {
+            return "profile";
+        } else {
+            super.update(userTo, AuthorizedUser.id());
+            AuthorizedUser.get().update(userTo);
+            status.setComplete();
+            return "redirect:meals";
+        }
     }
 }

@@ -47,7 +47,8 @@ public abstract class AbstractUserController {
     }
 
     public void update(UserTo userTo, int id) {
-        log.info("update {} with id={}", userTo);
+        log.info("update {} with id={}", userTo, id);
+        userTo.setId(id);
         User user = get(userTo.getId());
         repository.save(UserUtil.updateFromTo(user, userTo));
     }
