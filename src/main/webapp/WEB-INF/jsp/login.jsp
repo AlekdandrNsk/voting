@@ -24,10 +24,11 @@
             <div class="error">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</div>
         </c:if>
         <c:if test="${not empty param.message}">
-            <div class="message"><spring:message code="${param.message}"/></div>
+            <div class="message">${param.message}"</div>
         </c:if>
         <br/>
         <p>
+            <a class="btn btn-lg btn-success" href="register">register&raquo;</a>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
                 login User
             </button>
@@ -73,6 +74,9 @@
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 <script type="text/javascript">
+    <c:if test="${not empty param.username}">
+    setCredentials("${param.username}", "");
+    </c:if>
     function setCredentials(username, password) {
         $('input[name="username"]').val(username);
         $('input[name="password"]').val(password);
