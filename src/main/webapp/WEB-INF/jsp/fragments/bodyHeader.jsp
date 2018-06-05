@@ -9,6 +9,7 @@
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-info mr-1" href="users">Users</a>
                 </sec:authorize>
+                <a class="btn btn-info mr-1" href="profile">${userTo.name} <spring:message code="app.profile"/></a>
                 <a class="btn btn-primary" href="logout">
                     <span class="fa fa-sign-out"></span>
                 </a>
