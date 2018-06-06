@@ -9,6 +9,8 @@ import restaurant.AuthorizedUser;
 import restaurant.model.User;
 import restaurant.to.UserTo;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {
@@ -28,7 +30,7 @@ public class ProfileRestController extends AbstractUserController {
     @CacheEvict(value = "users", allEntries = true)
     @Transactional
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody UserTo userTo) {
+    public void update(@Valid @RequestBody UserTo userTo) {
         super.update(userTo, AuthorizedUser.id());
     }
 
