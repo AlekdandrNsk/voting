@@ -15,6 +15,8 @@ import restaurant.web.user.AbstractUserController;
 
 import javax.validation.Valid;
 
+import static restaurant.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
+
 @Controller
 public class RootController extends AbstractUserController {
 
