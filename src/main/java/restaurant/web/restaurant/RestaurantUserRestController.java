@@ -3,22 +3,21 @@ package restaurant.web.restaurant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import restaurant.model.Restaurant;
-import restaurant.model.User;
-import restaurant.repository.UserRepository;
 import restaurant.repository.datajpa.RestaurantRepository;
-import restaurant.web.user.AbstractUserController;
-import restaurant.web.user.ProfileRestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/rest/restaurants")
-public class RestaurantRestController{
+public class RestaurantUserRestController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -26,8 +25,10 @@ public class RestaurantRestController{
     private RestaurantRepository repository;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getAll() {
+    public List<Restaurant> getAllByDay(@RequestParam(value = "date", required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("getAll");
-        return repository.findAll();
+        return repository.findAllByDate(date == null ? LocalDate.now() : date);
     }
+
+
 }

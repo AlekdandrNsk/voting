@@ -2,12 +2,10 @@ package restaurant.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import restaurant.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "votes")
@@ -26,4 +24,28 @@ public class Vote extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

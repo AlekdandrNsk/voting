@@ -40,4 +40,9 @@ public class DataJpaUserRepositoryImpl implements UserRepository {
         System.out.println("Hello from DataJPA");
         return crudRepository.findAll(SORT_NAME_EMAIL);
     }
+
+    @Override
+    public User getOne(int id) {
+        return crudRepository.getOne(id);
+    }
 }

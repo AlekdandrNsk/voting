@@ -2,12 +2,9 @@ package restaurant.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import restaurant.View;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -25,6 +22,27 @@ public class Dish extends AbstractNamedEntity{
     private LocalDate date;
 
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
 
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }
