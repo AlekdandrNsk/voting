@@ -1,43 +1,30 @@
 package restaurant.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import restaurant.View;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "dishes")
 public class Dish extends AbstractNamedEntity{
 
-    private String restaurant;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
+    private Restaurant restaurant;
 
     private Double price;
 
     private LocalDate date;
 
-    public Dish(Integer id, String name, String restaurant, Double price, LocalDate date) {
-        super(id, name);
-        this.restaurant = restaurant;
-        this.price = price;
-        this.date = date;
-    }
 
-    public String getRestaurant() {
-        return restaurant;
-    }
 
-    public void setRestaurant(String restaurant) {
-        this.restaurant = restaurant;
-    }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 }

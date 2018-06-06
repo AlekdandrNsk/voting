@@ -21,3 +21,26 @@ INSERT INTO meals (date_time, description, calories, user_id) VALUES
   ('2015-05-31 20:00:00', 'Ужин', 510, 100000),
   ('2015-06-01 14:00:00', 'Админ ланч', 510, 100001),
   ('2015-06-01 21:00:00', 'Админ ужин', 1500, 100001);
+
+INSERT INTO restaurants (name) VALUES
+  ('Restaurant1'),
+  ('Restaurant2');
+
+INSERT INTO dishes (name, date, price, restaurant_id) VALUES
+  ('soup1', '2018-06-07', 500.99, 100010),
+  ('salad1', '2018-06-07',  500.99, 100010),
+  ('coffee1', '2018-06-07',  500.99, 100010),
+  ('soup2', '2018-06-07',  500.99, 100011),
+  ('salad2', '2018-06-07',  500.99, 100011),
+  ('coffee2', '2018-06-07',  500.99, 100011);
+
+INSERT INTO votes (date, restaurant_id, user_id) VALUES
+  ('2018-06-06', 100010, 100000),
+  ('2018-06-07', 100010, 100000),
+  ('2018-06-06', 100010, 100001),
+  ('2018-06-07', 100010, 100001);
+
+
+
+
+

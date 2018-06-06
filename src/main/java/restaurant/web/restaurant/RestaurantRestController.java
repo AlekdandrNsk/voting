@@ -1,4 +1,4 @@
-package restaurant.web.dish;
+package restaurant.web.restaurant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,24 +7,26 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import restaurant.model.Dish;
 import restaurant.model.Restaurant;
-import restaurant.repository.datajpa.DishRepository;
+import restaurant.model.User;
+import restaurant.repository.UserRepository;
 import restaurant.repository.datajpa.RestaurantRepository;
+import restaurant.web.user.AbstractUserController;
+import restaurant.web.user.ProfileRestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/dishes")
-public class DishRestController {
+@RequestMapping("/rest/restaurants")
+public class RestaurantRestController{
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private DishRepository repository;
+    private RestaurantRepository repository;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dish> getAll() {
+    public List<Restaurant> getAll() {
         log.info("getAll");
         return repository.findAll();
     }
