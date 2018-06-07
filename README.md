@@ -21,7 +21,7 @@ As a result, provide a link to github repository.
 It should contain the code and README.md with API documentation and curl commands to get data for voting and vote.
 
 
-##Admin
+### Admin
 #### get All Users
 `curl -s http://localhost:8080/votingsystem/rest/admin/users --user admin@gmail.com:admin`
 #### get User 100001
@@ -51,7 +51,7 @@ It should contain the code and README.md with API documentation and curl command
 #### update Dish100012
 `curl -s -X PUT -d '{"id": 100012,"name": "coffee2","restaurant":{"id": 100003,"name": "Restaurant2"},"price": 333.99,"date": "2018-06-07"}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/admin/dishes/100012 --user admin@gmail.com:admin`
 
-##User
+### User
 #### get AuthorizedUser
 `curl -s http://localhost:8080/votingsystem/rest/profile --user user@yandex.ru:password`
 #### delete AuthorizedUser
