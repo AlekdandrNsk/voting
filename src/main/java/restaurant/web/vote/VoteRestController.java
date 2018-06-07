@@ -9,14 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.AuthorizedUser;
-import restaurant.model.Dish;
-import restaurant.model.Restaurant;
-import restaurant.model.User;
 import restaurant.model.Vote;
 import restaurant.repository.UserRepository;
-import restaurant.repository.datajpa.RestaurantRepository;
 import restaurant.repository.datajpa.VoteRepository;
-import restaurant.to.UserTo;
 
 import java.net.URI;
 import java.time.LocalDate;

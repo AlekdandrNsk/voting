@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.AuthorizedUser;
 import restaurant.model.Dish;
-import restaurant.model.Meal;
 import restaurant.model.User;
 import restaurant.model.Vote;
 import restaurant.repository.datajpa.DishRepository;

@@ -3,17 +3,12 @@ package restaurant.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import restaurant.model.User;
 import restaurant.repository.UserRepository;
 import restaurant.to.UserTo;
-import restaurant.util.UserUtil;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static restaurant.util.UserUtil.prepareToSave;
 import static restaurant.util.UserUtil.updateFromTo;
