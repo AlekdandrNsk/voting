@@ -55,7 +55,7 @@ public class RestaurantAdminRestController {
 
     @Transactional
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Restaurant restaurant, @PathVariable("id") int id) {
+    public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable("id") int id) {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
         checkNotFoundWithId(repository.save(restaurant), id);

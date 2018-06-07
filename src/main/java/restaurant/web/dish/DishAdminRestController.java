@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.model.Dish;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -16,7 +17,7 @@ public class DishAdminRestController extends AbstractDishController{
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish) {
+    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish) {
         super.save(dish);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/votes" + "/{id}")
@@ -27,7 +28,7 @@ public class DishAdminRestController extends AbstractDishController{
 
     @Transactional
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Dish dish, @PathVariable("id") int id) {
+    public void update(@Valid @RequestBody Dish dish, @PathVariable("id") int id) {
         super.update(dish, id);
     }
 

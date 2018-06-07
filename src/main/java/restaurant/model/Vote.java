@@ -18,7 +18,8 @@ public class Vote extends AbstractBaseEntity{
     @NotNull
     private User user;
 
-
+    @Column(name = "date", nullable = false)
+    @NotNull
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER)

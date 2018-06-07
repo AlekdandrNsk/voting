@@ -15,6 +15,7 @@ import restaurant.repository.datajpa.UserRepository;
 import restaurant.repository.datajpa.VoteRepository;
 import restaurant.util.ValidationUtil;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,7 +44,7 @@ public class VoteRestController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote) {
+    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Vote vote) {
         vote.setUser(userRepository.getOne(AuthorizedUser.id()));
         log.info("create {}", vote);
         checkNew(vote);
@@ -56,7 +57,7 @@ public class VoteRestController {
 
     @Transactional
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Vote vote, @PathVariable("id") int id) {
+    public void update(@Valid @RequestBody Vote vote, @PathVariable("id") int id) {
         log.info("update {} with id={}", vote, id);
         assureIdConsistent(vote, id);
         vote.setUser(userRepository.getOne(AuthorizedUser.id()));

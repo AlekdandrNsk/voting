@@ -19,8 +19,12 @@ public class Dish extends AbstractNamedEntity{
     @NotNull
     private Restaurant restaurant;
 
+    @Column(name = "price", nullable = false)
+    @NotNull
     private Double price;
 
+    @Column(name = "date", nullable = false)
+    @NotNull
     private LocalDate date;
 
 
