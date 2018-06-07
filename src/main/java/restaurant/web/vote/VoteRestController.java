@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.AuthorizedUser;
 import restaurant.model.Vote;
-import restaurant.repository.UserRepository;
+import restaurant.repository.datajpa.UserRepository;
 import restaurant.repository.datajpa.VoteRepository;
+import restaurant.util.exception.ExccededTimeLimitToChangeVote;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -31,18 +33,30 @@ public class VoteRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vote> getAllByDay(@RequestParam(value = "date", required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        log.info("getAll");
-        return repository.findAllByDate(date == null ? LocalDate.now() : date);
+        LocalDate requiredDate = (date == null ? LocalDate.now() : date);
+        log.info("getAll votes by day {}", requiredDate);
+        return repository.findAllByDate(requiredDate);
     }
 
     // create new vote
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote) {
         vote.setUser(userRepository.getOne(AuthorizedUser.id()));
+        log.info("create {}", vote);
         repository.save(vote);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/votes" + "/{id}")
                 .buildAndExpand(vote.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(vote);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody Vote vote, @PathVariable("id") int id) {
+        log.info("update {} with id={}", vote, id);
+        vote.setUser(userRepository.getOne(AuthorizedUser.id()));
+        LocalTime limitTime = LocalTime.of(11, 00);
+        System.out.println(LocalTime.now());
+        if (LocalTime.now().isAfter(limitTime)) throw new ExccededTimeLimitToChangeVote("You have exceeded the time limit to change the vote");
+        repository.save(vote);
     }
 }

@@ -3,19 +3,17 @@ package restaurant;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import restaurant.model.User;
-import restaurant.to.UserTo;
-import restaurant.util.UserUtil;
 
 import static java.util.Objects.requireNonNull;
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;
 
-    private UserTo userTo;
+    private User user;
 
     public AuthorizedUser(User user) {
         super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
-        this.userTo = UserUtil.asTo(user);
+        this.user = user;
     }
 
     public static AuthorizedUser safeGet() {
@@ -34,23 +32,19 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     }
 
     public static int id() {
-        return get().userTo.getId();
+        return get().user.getId();
     }
 
-    public static int getCaloriesPerDay() {
-        return get().userTo.getCaloriesPerDay();
+    public void update(User user) {
+        user = this.user;
     }
 
-    public void update(UserTo newTo) {
-        userTo = newTo;
-    }
-
-    public UserTo getUserTo() {
-        return userTo;
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String toString() {
-        return userTo.toString();
+        return user.toString();
     }
 }

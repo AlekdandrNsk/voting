@@ -1,5 +1,6 @@
 package restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,6 +17,7 @@ public class Vote extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private User user;
+
 
     private LocalDate date;
 

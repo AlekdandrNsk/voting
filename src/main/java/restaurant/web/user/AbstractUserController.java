@@ -5,13 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import restaurant.model.User;
-import restaurant.repository.UserRepository;
-import restaurant.to.UserTo;
+import restaurant.repository.datajpa.UserRepository;
 
 import java.util.List;
 
 import static restaurant.util.UserUtil.prepareToSave;
-import static restaurant.util.UserUtil.updateFromTo;
 
 
 public abstract class AbstractUserController {
@@ -24,13 +22,13 @@ public abstract class AbstractUserController {
     private PasswordEncoder passwordEncoder;
 
     public List<User> getAll() {
-        log.info("getAll");
-        return repository.getAll();
+        log.info("getAll users");
+        return repository.findAll();
     }
 
     public User get(int id) {
-        log.info("get {}", id);
-        return repository.get(id);
+        log.info("get user {}", id);
+        return repository.findById(id).orElse(null);
     }
 
     public User create(User user) {
@@ -48,22 +46,9 @@ public abstract class AbstractUserController {
         repository.save(prepareToSave(user, passwordEncoder));
     }
 
-    public void update(UserTo userTo, int id) {
-        log.info("update {} with id={}", userTo, id);
-        userTo.setId(id);
-        User user = updateFromTo(get(userTo.getId()), userTo);
-        repository.save(prepareToSave(user, passwordEncoder));
-    }
-
     public User getByMail(String email) {
         log.info("getByEmail {}", email);
         return repository.getByEmail(email);
     }
 
-    public void enable(int id, boolean enabled) {
-        log.info((enabled ? "enable " : "disable ") + id);
-        User user = get(id);
-        user.setEnabled(enabled);
-        repository.save(user);
-    }
 }

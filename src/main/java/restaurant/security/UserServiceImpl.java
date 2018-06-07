@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import restaurant.AuthorizedUser;
 import restaurant.model.User;
-import restaurant.repository.UserRepository;
+import restaurant.repository.datajpa.UserRepository;
 
 @Service("userService")
 public class UserServiceImpl implements UserDetailsService {

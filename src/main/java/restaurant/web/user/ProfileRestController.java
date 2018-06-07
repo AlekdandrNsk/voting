@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import restaurant.AuthorizedUser;
 import restaurant.model.User;
-import restaurant.to.UserTo;
 
 import javax.validation.Valid;
 
@@ -30,13 +29,8 @@ public class ProfileRestController extends AbstractUserController {
     @CacheEvict(value = "users", allEntries = true)
     @Transactional
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody UserTo userTo) {
-        super.update(userTo, AuthorizedUser.id());
+    public void update(@Valid @RequestBody User user) {
+        super.update(user, AuthorizedUser.id());
     }
 
-
-    @GetMapping(value = "/text")
-    public String testUTF() {
-        return "Русский текст";
-    }
 }
