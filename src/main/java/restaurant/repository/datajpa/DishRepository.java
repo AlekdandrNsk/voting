@@ -9,6 +9,7 @@ import restaurant.model.Dish;
 import java.time.LocalDate;
 import java.util.List;
 
+@Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
     @Query("SELECT DISTINCT r FROM Dish r WHERE r.date=?1")

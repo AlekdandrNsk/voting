@@ -3,6 +3,7 @@ package restaurant.web.user;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.model.User;
@@ -46,6 +47,7 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @Override
+    @Transactional
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid @RequestBody User user, @PathVariable("id") int id) {
         super.update(user, id);

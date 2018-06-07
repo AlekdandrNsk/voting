@@ -1,21 +1,20 @@
 package restaurant.util;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import restaurant.HasId;
+import restaurant.util.exception.ExccededTimeLimitToChangeVote;
 import restaurant.util.exception.IllegalRequestDataException;
 import restaurant.util.exception.NotFoundException;
 
-import java.util.StringJoiner;
+import java.time.LocalTime;
 
 public class ValidationUtil {
 
     private ValidationUtil() {
     }
 
-    public static void checkNotFoundWithId(boolean found, int id) {
-        checkNotFound(found, "id=" + id);
+    public static void checkExcceededTime() {
+        LocalTime limitTime = LocalTime.of(11, 00);
+        if (LocalTime.now().isAfter(limitTime)) throw new ExccededTimeLimitToChangeVote("You have exceeded the time limit to change the vote");
     }
 
     public static <T> T checkNotFoundWithId(T object, int id) {
@@ -46,17 +45,6 @@ public class ValidationUtil {
         } else if (bean.getId() != id) {
             throw new IllegalRequestDataException(bean + " must be with id=" + id);
         }
-    }
-
-    //  http://stackoverflow.com/a/28565320/548473
-    public static Throwable getRootCause(Throwable t) {
-        Throwable result = t;
-        Throwable cause;
-
-        while (null != (cause = result.getCause()) && (result != cause)) {
-            result = cause;
-        }
-        return result;
     }
 
 }

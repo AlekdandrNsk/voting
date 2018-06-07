@@ -31,8 +31,4 @@
     </mvc:annotation-driven>
 
     <context:component-scan base-package="restaurant.**.web"/>
-
-    <mvc:interceptors>
-        <bean class="restaurant.interceptor.ModelInterceptor"/>
-    </mvc:interceptors>
 </beans>
