@@ -1,4 +1,4 @@
-# voting [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0836fe0522a44c9bb98c353221e9cf24)](https://www.codacy.com/app/AlekdandrNsk/voting?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlekdandrNsk/voting&amp;utm_campaign=Badge_Grade)
+# Voting system [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0836fe0522a44c9bb98c353221e9cf24)](https://www.codacy.com/app/AlekdandrNsk/voting?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlekdandrNsk/voting&amp;utm_campaign=Badge_Grade)
 
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
 
@@ -42,6 +42,8 @@ It should contain the code and README.md with API documentation and curl command
 `curl -s -H 'Content-Type:application/json;charset=UTF-8' -X POST -d "{"name": "Restaurant3"}"  http://localhost:8080/votingsystem/rest/admin/restaurants --user admin@gmail.com:admin`
 #### update Restaurant100002
 `curl -s -X PUT -d ' "id": 100003,"name": "RestaurantNew"' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/admin/restaurants/100002 --user admin@gmail.com:admin`
+#### delete Restaurant100002
+`curl -s -X DELETE http://localhost:8080/votingsystem/rest/admin/restaurants/100002 --user admin@gmail.com:admin`
 #### get Dish 100015
 `curl -s http://localhost:8080/votingsystem/rest/admin/dishes/100015 --user admin@gmail.com:admin`
 #### delete Dish 100015

@@ -3,6 +3,7 @@ package restaurant.web.restaurant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +60,12 @@ public class RestaurantAdminRestController {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
         checkNotFoundWithId(repository.save(restaurant), id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) {
+        repository.delete(id);
     }
 
 
