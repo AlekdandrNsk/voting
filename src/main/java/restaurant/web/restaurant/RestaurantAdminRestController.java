@@ -21,8 +21,9 @@ import static restaurant.util.ValidationUtil.checkNew;
 import static restaurant.util.ValidationUtil.checkNotFoundWithId;
 
 @RestController
-@RequestMapping("/rest/admin/restaurants")
+@RequestMapping(RestaurantAdminRestController.REST_URL)
 public class RestaurantAdminRestController {
+    static final String REST_URL = "/rest/admin/restaurants";
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
