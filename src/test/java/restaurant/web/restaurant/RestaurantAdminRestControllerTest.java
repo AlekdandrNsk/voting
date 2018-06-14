@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static restaurant.TestUtil.*;
 import static restaurant.UserTestData.ADMIN;
-import static restaurant.web.RestaurantTestData.*;
+import static restaurant.RestaurantTestData.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RestaurantAdminRestControllerTest extends AbstractControllerTest {

@@ -1,13 +1,9 @@
-package restaurant.web;
+package restaurant;
 
 import restaurant.model.Restaurant;
-import restaurant.model.Role;
-import restaurant.model.User;
 
-import java.time.Month;
 import java.util.Arrays;
 
-import static java.time.LocalDateTime.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantTestData {
@@ -36,5 +32,4 @@ public class RestaurantTestData {
     public static void assertMatch(Iterable<Restaurant> actual, Iterable<Restaurant> expected) {
         assertThat(actual).isEqualTo(expected);
     }
-
 }

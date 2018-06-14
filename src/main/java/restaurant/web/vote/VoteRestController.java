@@ -24,8 +24,9 @@ import static restaurant.util.ValidationUtil.assureIdConsistent;
 import static restaurant.util.ValidationUtil.checkNew;
 
 @RestController
-@RequestMapping("/rest/votes")
+@RequestMapping(VoteRestController.REST_URL)
 public class VoteRestController {
+    static final String REST_URL = "/rest/votes";
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -36,7 +37,7 @@ public class VoteRestController {
     private UserRepository userRepository;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Vote> getAllByDay(@RequestParam(value = "date", required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public List<Vote> getAllByDay(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         LocalDate requiredDate = (date == null ? LocalDate.now() : date);
         log.info("getAll votes by day {}", requiredDate);
         return repository.findAllByDate(requiredDate);

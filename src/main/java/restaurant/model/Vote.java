@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "votes")
-public class Vote extends AbstractBaseEntity{
+public class Vote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -26,6 +26,26 @@ public class Vote extends AbstractBaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
+
+    public Vote() {
+    }
+
+    public Vote(@NotNull User user, @NotNull LocalDate date, @NotNull Restaurant restaurant) {
+        this.user = user;
+        this.date = date;
+        this.restaurant = restaurant;
+    }
+
+    public Vote(Integer id, @NotNull LocalDate date, @NotNull Restaurant restaurant) {
+        super(id);
+        this.date = date;
+        this.restaurant = restaurant;
+    }
+
+    public Vote(Integer id, @NotNull User user, @NotNull LocalDate date, @NotNull Restaurant restaurant) {
+        this(id, date, restaurant);
+        this.user = user;
+    }
 
     public User getUser() {
         return user;
@@ -49,5 +69,15 @@ public class Vote extends AbstractBaseEntity{
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "user=" + user +
+                ", date=" + date +
+                ", restaurant=" + restaurant +
+                ", id=" + id +
+                '}';
     }
 }
