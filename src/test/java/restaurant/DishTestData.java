@@ -1,4 +1,4 @@
-package restaurant.web;
+package restaurant;
 
 import restaurant.model.Dish;
 
