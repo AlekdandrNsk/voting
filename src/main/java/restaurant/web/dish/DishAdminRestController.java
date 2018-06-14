@@ -12,8 +12,9 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/rest/admin/dishes")
-public class DishAdminRestController extends AbstractDishController{
+@RequestMapping(DishAdminRestController.REST_URL)
+public class DishAdminRestController extends AbstractDishController {
+    static final String REST_URL = "/rest/admin/dishes";
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

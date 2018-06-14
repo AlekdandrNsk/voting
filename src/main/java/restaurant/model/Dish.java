@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "dishes")
-public class Dish extends AbstractNamedEntity{
+public class Dish extends AbstractNamedEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -27,6 +27,20 @@ public class Dish extends AbstractNamedEntity{
     @NotNull
     private LocalDate date;
 
+    public Dish() {
+    }
+
+    public Dish(String name, @NotNull Restaurant restaurant, @NotNull Double price, @NotNull LocalDate date) {
+        super(name);
+        this.restaurant = restaurant;
+        this.price = price;
+        this.date = date;
+    }
+
+    public Dish(Integer id, String name, @NotNull Restaurant restaurant, @NotNull Double price, @NotNull LocalDate date) {
+        this(name, restaurant, price, date);
+        this.id = id;
+    }
 
     public Restaurant getRestaurant() {
         return restaurant;
