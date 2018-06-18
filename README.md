@@ -49,9 +49,9 @@ It should contain the code and README.md with API documentation and curl command
 #### delete Dish 100015
 `curl -s -X DELETE http://localhost:8080/votingsystem/rest/admin/dishes/100015 --user admin@gmail.com:admin`
 #### create Dish
-`curl -s -X POST -d '{"name": "soup1","restaurant":{"id": 100003,"name": "Restaurant1"},"price": 3.99,"date": "2018-06-07"}' -H 'Content-Type:application/json;charset=UTF-8'   http://localhost:8080/votingsystem/rest/admin/dishes --user admin@gmail.com:admin`
+`curl -s -X POST -d '{"name": "soup1","restaurant":{"id": 100003,"name": "Restaurant1"},"price": 399,"date": "2018-06-07"}' -H 'Content-Type:application/json;charset=UTF-8'   http://localhost:8080/votingsystem/rest/admin/dishes --user admin@gmail.com:admin`
 #### update Dish100012
-`curl -s -X PUT -d '{"id": 100012,"name": "coffee2","restaurant":{"id": 100003,"name": "Restaurant2"},"price": 333.99,"date": "2018-06-07"}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/admin/dishes/100012 --user admin@gmail.com:admin`
+`curl -s -X PUT -d '{"id": 100012,"name": "coffee2","restaurant":{"id": 100003,"name": "Restaurant2"},"price": 33399,"date": "2018-06-07"}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/admin/dishes/100012 --user admin@gmail.com:admin`
 
 
 ### User

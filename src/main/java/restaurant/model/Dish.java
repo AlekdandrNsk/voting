@@ -21,7 +21,7 @@ public class Dish extends AbstractNamedEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull
-    private Double price;
+    private int price;
 
     @Column(name = "date", nullable = false)
     @NotNull
@@ -30,14 +30,14 @@ public class Dish extends AbstractNamedEntity {
     public Dish() {
     }
 
-    public Dish(String name, @NotNull Restaurant restaurant, @NotNull Double price, @NotNull LocalDate date) {
+    public Dish(String name, @NotNull Restaurant restaurant, @NotNull int price, @NotNull LocalDate date) {
         super(name);
         this.restaurant = restaurant;
         this.price = price;
         this.date = date;
     }
 
-    public Dish(Integer id, String name, @NotNull Restaurant restaurant, @NotNull Double price, @NotNull LocalDate date) {
+    public Dish(Integer id, String name, @NotNull Restaurant restaurant, @NotNull int price, @NotNull LocalDate date) {
         this(name, restaurant, price, date);
         this.id = id;
     }
@@ -50,11 +50,11 @@ public class Dish extends AbstractNamedEntity {
         this.restaurant = restaurant;
     }
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
