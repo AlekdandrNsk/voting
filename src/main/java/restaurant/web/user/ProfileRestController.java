@@ -9,6 +9,8 @@ import restaurant.model.User;
 
 import javax.validation.Valid;
 
+import static restaurant.util.ValidationUtil.checkRoles;
+
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController {
@@ -28,6 +30,7 @@ public class ProfileRestController extends AbstractUserController {
     @Transactional
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid @RequestBody User user) {
+        checkRoles(user);
         super.update(user, AuthorizedUser.id());
     }
 

@@ -1,9 +1,12 @@
 package restaurant.util;
 
 import restaurant.HasId;
+import restaurant.model.Role;
+import restaurant.model.User;
 import restaurant.util.exception.ExccededTimeLimitToChangeVote;
 import restaurant.util.exception.IllegalRequestDataException;
 import restaurant.util.exception.NotFoundException;
+import restaurant.util.exception.RoleAdminForbiddenForUser;
 
 import java.time.LocalTime;
 
@@ -11,6 +14,11 @@ public class ValidationUtil {
 
     private ValidationUtil() {
     }
+
+    public static void checkRoles(User user) {
+        if (user.getRoles().contains(Role.ROLE_ADMIN)) throw new RoleAdminForbiddenForUser("Admin's role Is forbidden for User");
+    }
+
 
     public static void checkExcceededTime() {
         LocalTime limitTime = LocalTime.of(11, 00);
