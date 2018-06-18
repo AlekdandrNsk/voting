@@ -10,6 +10,6 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
-    @Query("SELECT DISTINCT r FROM Vote r WHERE r.date=?1")
+    @Query("SELECT DISTINCT v FROM Vote v WHERE v.date=?1")
     List<Vote> findAllByDate(LocalDate date);
 }

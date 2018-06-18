@@ -12,11 +12,11 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
-    @Query("SELECT DISTINCT r FROM Dish r WHERE r.date=?1")
+    @Query("SELECT DISTINCT d FROM Dish d WHERE d.date=?1")
     List<Dish> findAllByDate(LocalDate date);
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Dish u WHERE u.id=?1")
+    @Query("DELETE FROM Dish d WHERE d.id=?1")
     int delete(int id);
 }
