@@ -13,7 +13,7 @@ public class ValidationUtil {
     }
 
     public static void checkExcceededTime() {
-        LocalTime limitTime = LocalTime.of(18, 00);
+        LocalTime limitTime = LocalTime.of(11, 00);
         if (LocalTime.now().isAfter(limitTime)) throw new ExccededTimeLimitToChangeVote("You have exceeded the time limit to change the vote");
     }
 
