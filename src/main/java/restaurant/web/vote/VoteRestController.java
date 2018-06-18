@@ -10,18 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import restaurant.AuthorizedUser;
+import restaurant.model.Restaurant;
 import restaurant.model.Vote;
 import restaurant.repository.datajpa.UserRepository;
 import restaurant.repository.datajpa.VoteRepository;
-import restaurant.util.ValidationUtil;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import static restaurant.util.ValidationUtil.assureIdConsistent;
-import static restaurant.util.ValidationUtil.checkNew;
+import static restaurant.util.ValidationUtil.*;
 
 @RestController
 @RequestMapping(VoteRestController.REST_URL)
@@ -45,24 +44,23 @@ public class VoteRestController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Vote vote) {
-        vote.setUser(userRepository.getOne(AuthorizedUser.id()));
-        log.info("create {}", vote);
-        checkNew(vote);
-        repository.save(vote);
+    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
+        Vote createdVote = new Vote(AuthorizedUser.get().getUser(), LocalDate.now(), restaurant);
+        log.info("create {}", createdVote);
+        repository.save(createdVote);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/votes" + "/{id}")
-                .buildAndExpand(vote.getId()).toUri();
-        return ResponseEntity.created(uriOfNewResource).body(vote);
+                .buildAndExpand(createdVote.getId()).toUri();
+        return ResponseEntity.created(uriOfNewResource).body(createdVote);
     }
 
     @Transactional
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody Vote vote, @PathVariable("id") int id) {
-        log.info("update {} with id={}", vote, id);
-        assureIdConsistent(vote, id);
-        vote.setUser(userRepository.getOne(AuthorizedUser.id()));
-        ValidationUtil.checkExcceededTime();
-        ValidationUtil.checkNotFoundWithId(repository.save(vote), id);
+    public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable("id") int id) {
+        Vote updatedVote = new Vote(id, AuthorizedUser.get().getUser(), LocalDate.now(), restaurant);
+        log.info("update {} with id={}", updatedVote, id);
+        assureIdConsistent(updatedVote, id);
+        checkExcceededTime();
+        checkNotFoundWithId(repository.save(updatedVote), id);
     }
 }

@@ -15,17 +15,16 @@ public class VoteTestData {
     public static final int VOTE_2_ID = 100019;
 
     public static final LocalDate DATEOFVOTE = LocalDate.of(2018, 6, 7);
-    public static final LocalDate DATECREATED = LocalDate.of(2018, 6, 10);
 
     public static final Vote VOTE_1 = new Vote(VOTE_1_ID, DATEOFVOTE, RESTAURANT_1);
     public static final Vote VOTE_2 = new Vote(VOTE_2_ID, DATEOFVOTE, RESTAURANT_2);
 
     public static Vote getCreated() {
-        return new Vote(USER, DATECREATED, RESTAURANT_2);
+        return new Vote(USER, LocalDate.now(), RESTAURANT_2);
     }
 
     public static Vote getUpdated() {
-        return new Vote(VOTE_1_ID, USER, DATEOFVOTE, RESTAURANT_2);
+        return new Vote(VOTE_1_ID, USER, LocalDate.now(), RESTAURANT_2);
     }
 
     public static void assertMatch(Vote actual, Vote expected) {

@@ -11,12 +11,16 @@ import restaurant.repository.datajpa.VoteRepository;
 import restaurant.web.AbstractControllerTest;
 import restaurant.web.json.JsonUtil;
 
+import java.time.LocalDate;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static restaurant.RestaurantTestData.RESTAURANT_1;
+import static restaurant.RestaurantTestData.RESTAURANT_2;
 import static restaurant.TestUtil.contentJsonArray;
 import static restaurant.TestUtil.readFromJson;
 import static restaurant.TestUtil.userHttpBasic;
@@ -47,14 +51,14 @@ public class VoteRestControllerTest extends AbstractControllerTest {
         Vote created = getCreated();
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(created))
+                .content(JsonUtil.writeValue(RESTAURANT_1))
                 .with(userHttpBasic(USER)));
 
         Vote returned = readFromJson(action, Vote.class);
         created.setId(returned.getId());
 
         assertMatch(returned, created);
-        assertMatch(repository.findAllByDate(DATECREATED), created);
+        assertMatch(repository.findAllByDate(LocalDate.now()), created);
     }
 
     @Test
@@ -62,7 +66,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
         Vote updated = getUpdated();
         mockMvc.perform(put(REST_URL + VOTE_1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
+                .content(JsonUtil.writeValue(RESTAURANT_2))
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk());
 

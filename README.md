@@ -61,11 +61,14 @@ It should contain the code and README.md with API documentation and curl command
 `curl -s -X DELETE http://localhost:8080/votingsystem/rest/profile --user user@yandex.ru:password`
 #### update AuthorizedUser
 `curl -s -X PUT -d '{"id": 100000,"name": "NewUser","email": "user@yandex.ru","password": "password","registered": "2018-06-07T13:21:32.637+0000","roles": ["ROLE_USER"]}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/profile --user user@yandex.ru:password`
+#### getAllDishesByDay
+`curl -s http://localhost:8080/votingsystem/rest/dishes/?date=2018-06-07 --user user@yandex.ru:password`
 #### getAllVotesByDay
 `curl -s http://localhost:8080/votingsystem/rest/votes/?date=2018-06-07 --user user@yandex.ru:password`
 #### create Vote
-`curl -s -X POST -d '{"user":{"id": 100000,"name": "User","email": "user@yandex.ru","enabled": true,"registered": "2018-08-11T02:18:49.458+0000","roles": ["ROLE_USER"]},"date": "2018-06-07","restaurant":{"id": 100002,"name": "Restaurant1"}}' -H 'Content-Type:application/json;charset=UTF-8'   http://localhost:8080/votingsystem/rest/votes --user user@yandex.ru:password`
-#### update Vote100017
-`curl -s -X PUT -d '{"id": 100017,"user":{"id": 100000,"name": "User","email": "user@yandex.ru","enabled": true,"registered": "2018-06-11T02:18:49.458+0000","roles": ["ROLE_USER"]},"date": "2018-06-07","restaurant":{"id": 100003,"name": "Restaurant2"}}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/votes/100017 --user user@yandex.ru:password`
-#### getAllDishesByDay
-`curl -s http://localhost:8080/votingsystem/rest/dishes/?date=2018-06-07 --user user@yandex.ru:password`
+`curl -s -X POST -d '{"id": 100002,"name": "Restaurant1"}' -H 'Content-Type:application/json;charset=UTF-8'   http://localhost:8080/votingsystem/rest/votes --user user@yandex.ru:password`
+#### update Vote100020
+#####Для получения корректного результата нужно перезапустить сервер и выполнить предыдущую команду 'create Vote'
+#####Функциональность работает до 11.00 по времени сервера в соответствии с ТЗ.
+`curl -s -X PUT -d '{"id": 100003,"name": "Restaurant2"}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/votes/100020 --user user@yandex.ru:password`
+
