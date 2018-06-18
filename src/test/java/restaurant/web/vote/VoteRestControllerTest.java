@@ -12,18 +12,15 @@ import restaurant.web.AbstractControllerTest;
 import restaurant.web.json.JsonUtil;
 
 import java.time.LocalDate;
+import java.util.Collections;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static restaurant.RestaurantTestData.RESTAURANT_1;
 import static restaurant.RestaurantTestData.RESTAURANT_2;
-import static restaurant.TestUtil.contentJsonArray;
-import static restaurant.TestUtil.readFromJson;
-import static restaurant.TestUtil.userHttpBasic;
+import static restaurant.TestUtil.*;
 import static restaurant.UserTestData.USER;
 import static restaurant.VoteTestData.*;
 
@@ -58,7 +55,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         assertMatch(returned, created);
-        assertMatch(repository.findAllByDate(LocalDate.now()), created);
+        assertMatch(repository.findAllByDate(LocalDate.now()), Collections.singletonList(created));
     }
 
     @Test

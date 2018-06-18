@@ -3,9 +3,7 @@ package restaurant;
 import restaurant.model.Dish;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static restaurant.RestaurantTestData.*;
 
 public class DishTestData {
@@ -33,15 +31,4 @@ public class DishTestData {
         return new Dish(DISH_3_ID, "Updated Dish", RESTAURANT_2, 9966, DATEOFVOTE);
     }
 
-    public static void assertMatch(Dish actual, Dish expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Dish> actual, Dish... expected) {
-        assertMatch(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Iterable<Dish> actual, Iterable<Dish> expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
 }

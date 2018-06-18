@@ -2,10 +2,6 @@ package restaurant;
 
 import restaurant.model.Restaurant;
 
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class RestaurantTestData {
     public static final int RESTAURANT_1_ID = 100002;
     public static final int RESTAURANT_2_ID = 100003;
@@ -19,17 +15,5 @@ public class RestaurantTestData {
 
     public static Restaurant getUpdated() {
         return new Restaurant(RESTAURANT_2_ID, "Updated restaurant");
-    }
-
-    public static void assertMatch(Restaurant actual, Restaurant expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Restaurant> actual, Restaurant... expected) {
-        assertMatch(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Iterable<Restaurant> actual, Iterable<Restaurant> expected) {
-        assertThat(actual).isEqualTo(expected);
     }
 }

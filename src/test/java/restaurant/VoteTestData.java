@@ -3,9 +3,7 @@ package restaurant;
 import restaurant.model.Vote;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static restaurant.RestaurantTestData.RESTAURANT_1;
 import static restaurant.RestaurantTestData.RESTAURANT_2;
 import static restaurant.UserTestData.USER;
@@ -25,17 +23,5 @@ public class VoteTestData {
 
     public static Vote getUpdated() {
         return new Vote(VOTE_1_ID, USER, LocalDate.now(), RESTAURANT_2);
-    }
-
-    public static void assertMatch(Vote actual, Vote expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Vote> actual, Vote... expected) {
-        assertMatch(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Iterable<Vote> actual, Iterable<Vote> expected) {
-        assertThat(actual).isEqualTo(expected);
     }
 }

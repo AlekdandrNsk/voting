@@ -10,11 +10,26 @@ import restaurant.model.User;
 import restaurant.web.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static restaurant.web.json.JsonUtil.writeValue;
 
 public class TestUtil {
+
+    @SafeVarargs
+    public static <T> void assertMatch(Iterable<T> actual, T... expected) {
+        assertMatch(actual, Arrays.asList(expected));
+    }
+
+    public static <T> void assertMatch(Iterable<T> actual, Iterable<T> expected) {
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    public static <T> void assertMatch(T actual, T expected) {
+        assertThat(actual).isEqualTo(expected);
+    }
 
     public static String getContent(ResultActions action) throws UnsupportedEncodingException {
         return action.andReturn().getResponse().getContentAsString();

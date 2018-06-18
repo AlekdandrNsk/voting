@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static restaurant.TestUtil.assertMatch;
 import static restaurant.TestUtil.readFromJson;
 import static restaurant.TestUtil.userHttpBasic;
 import static restaurant.UserTestData.*;
@@ -52,7 +53,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        assertMatch(repository.findAll(), ADMIN);
+        assertMatch(repository.findAll(), Collections.singletonList(ADMIN));
     }
 
     @Test

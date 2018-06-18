@@ -11,6 +11,8 @@ import restaurant.repository.datajpa.RestaurantRepository;
 import restaurant.web.AbstractControllerTest;
 import restaurant.web.json.JsonUtil;
 
+import java.util.Collections;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -81,6 +83,6 @@ public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(delete(REST_URL + RESTAURANT_1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isNoContent());
-        assertMatch(repository.findAll(), RESTAURANT_2);
+        assertMatch(repository.findAll(), Collections.singletonList(RESTAURANT_2));
     }
 }
