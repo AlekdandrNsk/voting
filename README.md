@@ -68,7 +68,7 @@ It should contain the code and README.md with API documentation and curl command
 #### create Vote
 `curl -s -X POST -d '{"id": 100002,"name": "Restaurant1"}' -H 'Content-Type:application/json;charset=UTF-8'   http://localhost:8080/votingsystem/rest/votes --user user@yandex.ru:password`
 #### update Vote100020
-#####Для получения корректного результата нужно перезапустить сервер и выполнить предыдущую команду 'create Vote'
+#####Для получения корректного результата нужно перезапустить программу и выполнить предыдущую команду 'create Vote'
 #####Функциональность работает до 11.00 по времени сервера в соответствии с ТЗ.
 `curl -s -X PUT -d '{"id": 100003,"name": "Restaurant2"}' -H 'Content-Type: application/json' http://localhost:8080/votingsystem/rest/votes/100020 --user user@yandex.ru:password`
 
